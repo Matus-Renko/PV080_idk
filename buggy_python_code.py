@@ -1,10 +1,10 @@
 import flask
 import yaml
 
-app = flask.Flask(__name__)
+APP = flask.Flask(__name__)
 
 
-@app.route("/")
+@APP.route("/")
 def index():
     version = flask.request.args.get("urllib_version")
     url = flask.request.args.get("url")
@@ -28,7 +28,7 @@ def fetch_website(urllib_version, url):
 
     try:
         http = urllib.PoolManager()
-        # r = http.request('GET', url)
+        r = http.request('GET', url)
     except:
         print('Exception')
 
@@ -46,10 +46,10 @@ def authenticate(password):
 
 if __name__ == '__main__':
     print("Vulnerabilities:")
-    print("1. Format string vulnerability:")
-    print("2. Code injection vulnerability:")
-    print("3. Yaml deserialization vulnerability:")
-    print("4. Use of assert statements vulnerability:")
+    print("1. Format string vulnerability: use string={person.__init__.__globals__[CONFIG][API_KEY]}")
+    print("2. Code injection vulnerability: use string=;print('Own code executed') #")
+    print("3. Yaml deserialization vulnerability: use string=file.yalm")
+    print("4. Use of assert statements vulnerability: run program with -O arguments")
     CHOICE = input("Select vulnerability: ")
     if CHOICE == "1":
         NEW_PERSON = Person("Vickie")
